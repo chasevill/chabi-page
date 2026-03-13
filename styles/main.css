@@ -1,0 +1,61 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(160deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  font-family: system-ui, -apple-system, sans-serif;
+  color: #eee;
+}
+h1 {
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  margin-bottom: 3rem;
+  font-size: 1.25rem;
+}
+.envelope-wrapper {
+  cursor: pointer;
+  perspective: 800px;
+}
+.envelope {
+  position: relative;
+  width: 200px;
+  height: 140px;
+}
+.envelope-body {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 200px;
+  height: 100px;
+  background: #f5efe6;
+  border: 2px solid #d4c4a8;
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+}
+.envelope-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 102px solid transparent;
+  border-right: 102px solid transparent;
+  border-top: 58px solid #e8ddd0;
+  transform-origin: 50% 100%;
+  transition: transform 0.5s ease;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
+}
+.envelope-wrapper.open .envelope-flap {
+  transform: rotateX(-160deg);
+}
+.hint {
+  margin-top: 2rem;
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
