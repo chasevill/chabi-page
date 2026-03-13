@@ -1,21 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chabi</title>
-  <link rel="stylesheet" href="styles/main.css">
-</head>
-<body>
-  <h1>Chabi</h1>
-  <div class="envelope-wrapper" id="envelope" role="button" tabindex="0" aria-label="Open envelope">
-    <div class="envelope">
-      <div class="envelope-body"></div>
-      <div class="envelope-flap"></div>
-    </div>
-  </div>
-  <p class="hint">Click to open</p>
 
-  <script src="scripts/main.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chabi</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+
+<body>
+    <button type="button" id="envelope" aria-label="Open envelope">
+        <div class="envelope">
+            <div class="envelope-flyaway">
+                <div class="envelope-body"></div>
+                <div class="envelope-top-flap"></div>
+            </div>
+            <div class="letter">
+                <div class="letter-decoration letter-decoration--top">☘</div>
+                <div class="letter-decoration letter-decoration--bottom">☘</div>
+                <p class="letter-message">Prabidhi Rana,<br>Will you be my Patrick?</p>
+                <div class="letter-accent">🍀</div>
+            </div>
+        </div>
+    </button>
+    <div class="letter-actions">
+        <button type="button" class="letter-btn letter-btn--yes">Yes</button>
+        <button type="button" class="letter-btn letter-btn--no">No</button>
+    </div>
+    <p class="hint">Click to open</p>
+    <div class="yippee-popup" id="yippeePopup" aria-live="polite">YIPPEEE!!!</div>
+
+    <script src="scripts/main.js"></script>
 </body>
+
 </html>

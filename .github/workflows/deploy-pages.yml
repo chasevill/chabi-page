@@ -1,0 +1,50 @@
+# Deploy to GitHub Pages and inject FORMSPREE_ENDPOINT from GitHub Secrets.
+# Add the secret: repo → Settings → Secrets and variables → Actions → New repository secret
+# Name: FORMSPREE_ENDPOINT   Value: https://formspree.io/f/YOUR_FORM_ID
+
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Inject Formspree endpoint
+        env:
+          FORMSPREE_ENDPOINT: ${{ secrets.FORMSPREE_ENDPOINT }}
+        run: |
+          if [ -n "$FORMSPREE_ENDPOINT" ]; then
+            sed -i.bak "s|__FORMSPREE_ENDPOINT__|$FORMSPREE_ENDPOINT|g" scripts/main.js
+            rm -f scripts/main.js.bak
+          fi
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@3
+        with:
+          path: .
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deploy
+        uses: actions/deploy-pages@4
